@@ -12,13 +12,13 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{url('coachs')}}">
+            <a class="nav-link" href="{{route('coachs.index')}}">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>COACHES</p>
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{url('coachs')}}">
+            <a class="nav-link" href="{{route('user.index')}}">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>Clients</p>
             </a>
@@ -30,19 +30,19 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{url('coachs')}}">
+            <a class="nav-link" href="{{route('programs.index')}}">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>Program</p>
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{route('programs.index')}}">
+            <a class="nav-link" href="{{route('exercises.index')}}">
                 <i class="nc-icon nc-notes"></i>
                 <p>Exercises</p>
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{route('programs.index')}}">
+            <a class="nav-link" href="{{route('workout.index')}}">
                 <i class="nc-icon nc-notes"></i>
                 <p>Workout</p>
             </a>

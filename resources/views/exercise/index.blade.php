@@ -2,11 +2,11 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2 >TAGS</h2>
+            <h2 >Exercies</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
-                <a class="btn btn-primary mt-3" href="{{ route('tags.create') }}"> Create New Tag</a>
+                <a class="btn btn-primary mt-3" href="{{ route('exercises.create') }}"> Create New Exercies</a>
             </div>
         </div>
     </div>
@@ -21,29 +21,34 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Tag Type</th>
-            <th>Image</th>
+           
+            <th>Bio</th>
+            <th>Repetitions</th>
+            <th>Video</th>
             
             <th width="280px">Action</th>
         </tr>
-        @if($tags)
-        @foreach ($tags as $tag)
+        @if($exercise)
+        @foreach ($exercise as $key=> $exercises)
         <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $tag->tag }}</td>
-            <td>{{ $tag->type }}</td>
+            <td>{{ ++$key }}</td>
+            <td>{{ $exercises->name }}</td>
+            <td>{{ $exercises->text_bio }}</td>
+            <td>{{ $exercises->repetitions }}</td>
+          
             <td>
-                <img src="{{ asset('storage/tags/profile/'.$tag->photo)}}" style="width:70px; height:40px" alt="User" />
-               
-            
+                <video width="100px" height="100px" controls>
+                    <source src="{{ asset('storage/exercise_videos/' . $exercises->description_video) }}" type="video/mp4">
+                </video>
             </td>
             
+            
             <td>
-                <form action="{{ route('tags.destroy',$tag->id) }}" method="POST">
+                <form action="{{ route('exercises.destroy',$exercises->id) }}" method="POST">
    
                     {{-- <a class="btn btn-info" href="{{ route('tags.show',$tag->id) }}">Show</a> --}}
     
-                    <a class="btn btn-primary" href="{{ route('tags.edit',$tag->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('exercises.edit',$exercises->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')
@@ -56,6 +61,6 @@
         @endif
     </table>
   
-    {!! $tags->links() !!}
+    {!! $exercise->links() !!}
       
 @endsection

@@ -2,11 +2,11 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2 >COACHES</h2>
+            <h2 >Workout</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
-                <a class="btn btn-primary mt-3" href="{{ url('coachs/create') }}"> Add</a>
+                <a class="btn btn-primary mt-3" href="{{ url('workout/create') }}"> Add</a>
             </div>
         </div>
     </div>
@@ -21,24 +21,21 @@
         <tr>
             <th>No</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Bio</th>
+        
+         
             <th width="280px">Action</th>
         </tr>
-        @foreach ($coachs as $coach)
+        @foreach ($workout as $workouts)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $coach->name }}</td>
-            <td>{{ $coach->email }}</td>
-            <td>{{ $coach->phone_number }}</td>
-            <td>{{ $coach->bio }}</td>
+            <td>{{ $workouts->name }}</td>
+        
             <td>
-                <form action="{{ route('coachs.destroy',[$coach->id]) }}" method="POST">
+                <form action="{{ route('workout.destroy',[$workouts->id]) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ url('coachs/show/'.$coach->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('workout.edit',[$workouts->id]) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ url('coachs/edit/'.$coach->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('workout.edit',[$workouts->id]) }}">Edit</a>
    
                     @csrf
       
@@ -49,6 +46,6 @@
         @endforeach
     </table>
   
-    {!! $coachs->links() !!}
+    {!! $workout->links() !!}
       
 @endsection

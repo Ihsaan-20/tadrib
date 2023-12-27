@@ -2,11 +2,11 @@
 @section('app')
 <div class="row">
     <div class="col-md-10">
-        <h2 >Add New Coach</h2>
+        <h2 >Add New Workout</h2>
     </div>
     <div class="col-md-2 ">
         <div class="float-right">
-            <a class="btn btn-primary mt-3" href="{{ url('coachs') }}"> Back</a>
+            <a class="btn btn-primary mt-3" href="{{ url('workout') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -24,67 +24,72 @@
    
 <div class="row">
     <div class="col-12">
-        <form action="{{ url('coachs/store') }}" method="POST">
+        <form action="{{ route('workout.store') }}" method="POST">
             @csrf
           
              <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <strong>First Name:</strong>
-                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                        <strong>Name:</strong>
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Workout Name">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <strong>Last Name:</strong>
-                        <input type="text" name="last_name" class="form-control" placeholder="Last Name">
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Email:</strong>
-                        <input type="email" name="email" class="form-control" placeholder="Email">
-                    </div>
-                </div>
-        
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Phone_number:</strong>
-                        <input type="text" name="phone_number" class="form-control" placeholder="Phone_number">
-                    </div>
-                </div>
-                
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Password:</strong>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                    </div>
-                </div>
-                
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Password Confirmation:</strong>
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirmation">
-                    </div>
-                </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Tags:</strong>
-                        <br>
-                       @foreach($tags as $t)
-                        <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}">
-                        <label for="option1">{{$t->tag}}</label>
-                    <br>
-                  @endforeach
-                       
+                        <strong>Introductory video Video:</strong>
+                        <input type="file" name="introductory_video" value="{{ old('introductory_video') }}" class="form-control">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Bio:</strong>
-                        <input type="text" name="bio" class="form-control" placeholder="Bio">
+                        <input type="text" name="text_bio" value="{{ old('text_bio') }}" class="form-control" placeholder="text bio">
                     </div>
                 </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Estimated Duration:</strong>
+                        <input type="time" name="estimated_duration_hours" value="{{ old('estimated_duration_hours') }}" class="form-control" placeholder="Estimated Duration">
+                    </div>
+                </div>
+                
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Rest (in days):</strong>
+                        <input type="number" name="rest" value="{{ old('rest') }}" class="form-control" placeholder="Rest">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Tags:</strong>
+                        <br>
+                        @if($tags)
+                       @foreach($tags as $t)
+                        <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}">
+                        <label for="option1">{{$t->tag}}</label>
+                    <br>
+                  @endforeach
+                  @endif
+                       
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Exercises:</strong>
+                        <br>
+                        @if($exercises)
+                       @foreach($exercises as $t)
+                        <input type="checkbox" name="number_of_exercises[]" id="{{$t->id}}" value="{{$t->id}}">
+                        <label for="option1">{{$t->name}}</label>
+                    <br>
+                  @endforeach
+                  @endif
+                       
+                    </div>
+                </div>
+              
                 <div class="col-xs-12 col-sm-12 col-md-12">
                         <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

@@ -9,6 +9,7 @@ class Exercise extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'name',
         'description_video',
         'text_bio',
         'repetitions',

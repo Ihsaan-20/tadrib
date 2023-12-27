@@ -47,6 +47,44 @@
 </body>
 <!--   Core JS Files   -->
 <script src="{{ asset('frontend/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if (Session::has('success'))
+        Swal.fire({
+            title: "Success",
+            text: "{{ session()->get('success') }}",
+            icon: "success"
+        });
+    @endif
+
+    @if (Session::has('error'))
+        Swal.fire({
+            title: "Error",
+            text: "{{ session()->get('error') }}",
+            icon: "error"
+        });
+    @endif
+
+    @if (Session::has('info'))
+        Swal.fire({
+            title: "Info",
+            text: "{{ session()->get('Info') }}",
+            icon: "info"
+        });
+    @endif
+
+    @if (Session::has('warning'))
+        Swal.fire({
+            title: "Warning",
+            text: "{{ session()->get('warning') }}",
+            icon: "warning"
+        });
+    @endif
+</script>
+
+
+
 @yield('customJs')
 <script src="{{ asset('frontend/js/core/popper.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('frontend/js/core/bootstrap.min.js') }}" type="text/javascript"></script>

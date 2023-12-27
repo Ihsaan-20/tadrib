@@ -2,11 +2,11 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2 >Coach</h2>
+            <h2 >Users</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
-                <a class="btn btn-primary mt-3" href="{{ route('coachs.index') }}"> Back</a>
+                <a class="btn btn-primary mt-3" href="{{ route('user.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -22,26 +22,23 @@
         </div>
     @endif
   
-    <form action="{{ route('coachs.update',$coach->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.update',$coach->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
    
-
-
-            <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>First Name:</strong>
-                        <input type="text" name="first_name" value="{{ $coach->first_name }}" class="form-control" placeholder="First Name">
-                    </div>
+         <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>First Name:</strong>
+                    <input type="text" name="first_name"  value="{{ $coach->first_name }}" class="form-control" placeholder="First Name">
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="form-group">
-                        <strong>Last Name:</strong>
-                        <input type="text" name="last_name" class="form-control" value="{{ $coach->last_name }}" placeholder="Last Name">
-                    </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Last Name:</strong>
+                    <input type="text" name="last_name"   value="{{ $coach->last_name }}" class="form-control" placeholder="Last Name">
                 </div>
-
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Email:</strong>
@@ -50,7 +47,7 @@
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Phone Number:</strong>
+                    <strong>Phone_Number:</strong>
                     <input type="text" name="phone_number" value="{{ $coach->phone_number }}" class="form-control" placeholder="Phone_Number">
                 </div>
             </div>
@@ -60,12 +57,7 @@
                     <input type="file" name="profile_picture" class="form-control" placeholder="Profile">
                 </div>
             </div>
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Bio:</strong>
-                    <input type="text" name="bio" value="{{ $coach->bio }}" class="form-control" placeholder="bio">
-                </div>
-            </div>
+          
             <div class="col-xs-12 col-sm-12 col-md-12">
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>

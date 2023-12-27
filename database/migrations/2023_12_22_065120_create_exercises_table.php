@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('exercises', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
             $table->text('description_video')->nullable();
             $table->text('text_bio')->nullable();
             $table->integer('repetitions')->nullable();
