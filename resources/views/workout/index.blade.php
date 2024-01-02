@@ -33,7 +33,7 @@
             <td>
                 <form action="{{ route('workout.destroy',[$workouts->id]) }}" method="POST">
    
-                    <a class="btn btn-primary" href="{{ route('workout.edit',[$workouts->id]) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('workout.show',[$workouts->id]) }}">Show</a>
     
                     <a class="btn btn-primary" href="{{ route('workout.edit',[$workouts->id]) }}">Edit</a>
    

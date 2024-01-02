@@ -23,4 +23,14 @@ class Workout extends Model
     {
         return $this->hasMany(Set::class);
     }
+
+    public function tags()
+{
+    return $this->belongsToMany(Tag::class);
+}
+
+public function exercises()
+{
+    return $this->belongsToMany(Exercise::class);
+}
 }

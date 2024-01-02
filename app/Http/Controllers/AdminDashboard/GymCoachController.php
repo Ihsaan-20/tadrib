@@ -87,9 +87,10 @@ class GymCoachController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    { 
+        $tags=Tag::all();
        $coach=User::find($id);
-        return view('coachs.edit',compact('coach'));
+        return view('coachs.edit',compact('coach','tags'));
     }
     
     /**

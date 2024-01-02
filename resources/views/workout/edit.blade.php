@@ -24,7 +24,7 @@
 
 <div class="row">
     <div class="col-12">
-        <form action="{{ route('workout.update', $workout->id) }}" method="POST">
+        <form action="{{ route('workout.update', $workout->id) }}" method="POST"  enctype="multipart/form-data">
             @csrf
             @method('PUT') <!-- Use the PUT method for updates -->
 
@@ -35,10 +35,21 @@
                         <input type="text" name="name" value="{{ old('name', $workout->name) }}" class="form-control" placeholder="Workout Name">
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="col-xs-3 col-sm-3 col-md-3">
                     <div class="form-group">
-                        <strong>Introductory video Video:</strong>
+                        <strong>Introductory video:</strong>
                         <input type="file" name="introductory_video" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <div class="form-group"><br>
+                        @if($workout->introductory_video)
+                        <video width="150px" height="100px" controls>
+                            <source src="{{ asset('storage/introductory_video/'.$workout->introductory_video) }}" type="video/mp4">
+                        </video>
+                            @else
+                                <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                        @endif
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
@@ -68,8 +79,8 @@
                         @if($tags)
                             @foreach($tags as $t)
                                 <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}" 
-                                       {{ in_array($t->id, (array)old('tags', $workout->tags)) ? 'checked' : '' }}>
-                                <label for="option1">{{$t->tag}}</label>
+                                    {{ in_array($t->id, (array)old('tags', json_decode($workout->tags))) ? 'checked' : '' }}>
+                                <label for="{{$t->id}}">{{$t->tag}}</label>
                                 <br>
                             @endforeach
                         @endif
@@ -81,14 +92,21 @@
                         <strong>Exercises:</strong>
                         <br>
                         @if($exercises)
-                            @foreach($exercises as $t)
-                                <input type="checkbox" name="number_of_exercises[]" id="{{$t->id}}" value="{{$t->id}}" {{ in_array($t->id, (array)old('number_of_exercises', $workout->number_of_exercises)) ? 'checked' : '' }}>
-                                <label for="option1">{{$t->name}}</label>
-                                <br>
-                            @endforeach
+                        @foreach($exercises as $e)
+                        <input type="checkbox" name="number_of_exercises[]" id="{{$e->id}}" value="{{$e->id}}" 
+                            {{ in_array($e->id, (array)old('exercises', json_decode($workout->number_of_exercises))) ? 'checked' : '' }}>
+                        <label for="{{$e->id}}">{{$e->name}}</label>
+                        <br>
+                    @endforeach
                         @endif
                     </div>
                 </div>
+
+
+
+
+
+
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                         <button type="submit" class="btn btn-primary">Update</button>

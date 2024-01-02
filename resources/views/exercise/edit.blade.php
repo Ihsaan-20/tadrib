@@ -55,6 +55,17 @@
                             <input type="file" name="video" class="form-control">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            @if($exercise->description_video)
+                            <video width="150px" height="150px" controls>
+                                <source src="{{ asset('storage/exercise_videos/'.$exercise->description_video) }}" type="video/mp4">
+                            </video>
+                                @else
+                                    <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                            @endif
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">

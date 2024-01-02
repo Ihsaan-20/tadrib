@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminDashboard\TagController;
 use App\Http\Controllers\AdminDashboard\ExercisesController;
 use App\Http\Controllers\AdminDashboard\GymClientController;
 use App\Http\Controllers\AdminDashboard\WorkoutController;
+use App\Http\Controllers\AdminDashboard\GymSetController;
 
 
 
@@ -152,6 +153,17 @@ Route::get('workout/{workout}', [WorkoutController::class, 'show'])->name('worko
 Route::get('workout/{workout}/edit', [WorkoutController::class, 'edit'])->name('workout.edit');
 Route::put('workout/{workout}', [WorkoutController::class, 'update'])->name('workout.update');
 Route::delete('workout/{workout}', [WorkoutController::class, 'destroy'])->name('workout.destroy');
+
+// Route ExercisesController Controllers
+
+Route::get('/set',[GymSetController::class,'index'])->name('set.index');
+Route::get('/set/create',[GymSetController::class,'create'])->name('set.create');
+Route::post('/set/store',[GymSetController::class,'store'])->name('set.store');
+Route::get('/set/show/{id}',[GymSetController::class,'show'])->name('set.show');
+Route::get('/set/edit/{id}',[GymSetController::class,'edit'])->name('set.edit');
+Route::put('/set/update/{id}',[GymSetController::class,'update'])->name('set.update');
+Route::post('/set/delete/{id}',[GymSetController::class,'destroy'])->name('set.destroy');
+
 
 
 

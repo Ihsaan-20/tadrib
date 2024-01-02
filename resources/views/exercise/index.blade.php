@@ -37,9 +37,17 @@
             <td>{{ $exercises->repetitions }}</td>
           
             <td>
-                <video width="100px" height="100px" controls>
-                    <source src="{{ asset('storage/exercise_videos/' . $exercises->description_video) }}" type="video/mp4">
+
+                @if($exercises->description_video)
+                <video width="150px" height="150px" controls>
+                    <source src="{{ asset('storage/exercise_videos/'.$exercises->description_video) }}" type="video/mp4">
                 </video>
+                    @else
+                        <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                @endif
+
+
+               
             </td>
             
             

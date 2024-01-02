@@ -48,7 +48,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{route('programs.index')}}">
+            <a class="nav-link" href="{{route('set.index')}}">
                 <i class="nc-icon nc-notes"></i>
                 <p>Set</p>
             </a>

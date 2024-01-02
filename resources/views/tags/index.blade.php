@@ -33,8 +33,11 @@
             <td>{{ $tag->tag }}</td>
             <td>{{ $tag->type }}</td>
             <td>
+                @if($tag->photo)
                 <img src="{{ asset('storage/tags/profile/'.$tag->photo)}}" style="width:70px; height:40px" alt="User" />
-               
+                @else
+                <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                @endif
             
             </td>
             

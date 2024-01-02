@@ -124,7 +124,7 @@ class TagController extends Controller
         $request->validate([
             'tag' => 'required',
             'type' => 'required',
-            'image' => 'required',
+           
         ]);
     
         $tags = Tag::find($tag->id); // Use $request->input('id') instead of $request->id

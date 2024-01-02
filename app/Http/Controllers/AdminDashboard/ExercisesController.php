@@ -57,9 +57,13 @@ class ExercisesController extends Controller
             $videoPath = $videoFile->storeAs($destination, $videoFileName);
         }
     
+
+
+
+        
         Exercise::create([
             'name' => $request->input('name'),
-            'description_video' => $videoPath,
+            'description_video' => $videoFileName,
             'text_bio' => $request->input('text_bio'),
             'repetitions' => $request->input('repetitions'),
         ]);

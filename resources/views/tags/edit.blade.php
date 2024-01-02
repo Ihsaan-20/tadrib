@@ -2,7 +2,7 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2>Edit Program</h2>
+            <h2>Edit Tag</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
@@ -57,6 +57,16 @@
                                 <input type="file" name="image" class="form-control">
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            @if($tag->photo)
+                                    <img src="{{ asset('storage/tags/profile/'.$tag->photo)}}" style="width:70px; height:40px" alt="User" />
+                                @else
+                                    <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                            @endif
+                        </div>
+                        <br>
+                        <br>
+                        <br>
 
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <button type="submit" class="btn btn-primary">Submit</button>

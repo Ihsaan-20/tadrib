@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
-                        <strong>Introductory video Video:</strong>
+                        <strong>Introductory Video:</strong>
                         <input type="file" name="introductory_video" value="{{ old('introductory_video') }}" class="form-control">
                     </div>
                 </div>

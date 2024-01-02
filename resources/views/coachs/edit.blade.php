@@ -2,7 +2,7 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2 >Coach</h2>
+            <h2 >Update Coach</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
@@ -64,6 +64,21 @@
                 <div class="form-group">
                     <strong>Bio:</strong>
                     <input type="text" name="bio" value="{{ $coach->bio }}" class="form-control" placeholder="bio">
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Tags:</strong>
+                    <br>
+                    @if($tags)
+                            @foreach($tags as $t)
+                                <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}" 
+                                    {{ in_array($t->id, (array)old('tags', json_decode($coach->tags))) ? 'checked' : '' }}>
+                                <label for="{{$t->id}}">{{$t->tag}}</label>
+                                <br>
+                            @endforeach
+                        @endif
+                   
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">

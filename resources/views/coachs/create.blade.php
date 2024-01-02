@@ -71,11 +71,13 @@
                     <div class="form-group">
                         <strong>Tags:</strong>
                         <br>
-                       @foreach($tags as $t)
-                        <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}">
-                        <label for="option1">{{$t->tag}}</label>
-                    <br>
-                  @endforeach
+                        @if($tags)
+                        @foreach($tags as $t)
+                            <input type="checkbox" name="tags[]" id="{{$t->id}}" value="{{$t->id}}">
+                            <label for="option1">{{$t->tag}}</label>
+                            <br>
+                        @endforeach
+                        @endif
                        
                     </div>
                 </div>
