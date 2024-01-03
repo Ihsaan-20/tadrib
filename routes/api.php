@@ -21,24 +21,24 @@ use App\Http\Controllers\Api\Auth\ApiProgramController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
 
 
+    Route::post('/user-login', [LoginController::class, 'login'])->name('users.login');
+    Route::post('/user-register', [LoginController::class, 'register'])->name('users.register');
 
-Route::post('/user-login', [LoginController::class, 'login'])->name('loginAPI');
-Route::post('/user-store', [LoginController::class, 'store'])->name('store');
+    Route::middleware('auth:api')->group(function () {
 
-Route::middleware('auth:api')->group(function () {
-    Route::get('/user-show', [LoginController::class, 'show'])->name('show');
-    Route::post('/user-logout', [LoginController::class, 'destroy'])->name('destroy');
+        Route::get('/users/show', [LoginController::class, 'getAllUsers'])->name('users.getAllUsers');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
-  
+    });
 
 
-});
+    Route::post('/forgot-password', [LoginController::class, 'sendForgetPasswordEmail'])->name('forgot-password.send');
+Route::post('/verify-password-reset', [LoginController::class, 'verifyForgetPassword'])->name('forgot-password.verify');
 
 // CoachApi's
 Route::get('/get-all-coachs', [ApiCoachController ::class, 'getAllCoachs'])->name('getAllCoachs');
@@ -58,10 +58,4 @@ Route::delete('/delete-program/{id}', [ApiProgramController ::class, 'destroyPro
 
 
 
-// Route::get('/customers/get-all', [CustomerController::class, 'index'])->name('index');
-// Route::post('/customers/store', [CustomerController::class, 'store'])->name('store');
-// Route::get('/customer/{id}', [CustomerController::class, 'show'])->name('show');
-// Route::get('/customer/{id}/edit', [CustomerController::class, 'edit'])->name('edit');
-// Route::put('/customer/{id}/update', [CustomerController::class, 'update'])->name('update');
-// Route::delete('/customer/{id}/delete', [CustomerController::class, 'destroy'])->name('delete');
 
