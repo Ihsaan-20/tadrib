@@ -6,7 +6,7 @@
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
-                <a class="btn btn-primary mt-3" href="{{ route('programs.create') }}"> Create New Program</a>
+                <a class="btn btn-primary mt-3" href="{{ route('program.create') }}"> Create New Program</a>
             </div>
         </div>
     </div>

@@ -30,7 +30,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{route('programs.index')}}">
+            <a class="nav-link" href="{{route('program.index')}}">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>Program</p>
             </a>

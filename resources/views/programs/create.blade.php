@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 ">
         <div class="float-right">
-            <a class="btn btn-primary mt-3" href="{{ route('programs.index') }}"> Back</a>
+            <a class="btn btn-primary mt-3" href="{{ route('program.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
     </div>
 @endif
    
-<form action="{{ route('programs.store') }}" method="POST">
+<form action="{{ route('program.store') }}" method="POST">
     @csrf
   
      <div class="row">
@@ -42,25 +42,109 @@
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-                <strong>Progress:</strong>
-                <input type="text" name="progress" class="form-control" placeholder="Progress">
+                <strong>Video:</strong>
+                <input type="file"  name='introductory_video' class="form-control" placeholder="Video">
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            < <div class="form-group">
+                <strong>Thumbnail:</strong>
+                <input type="file"  name='thumbnail' class="form-control" placeholder="Thumbnail">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            < <div class="form-group">
+                <strong>Text Bio:</strong>
+                <input type="textarea" name="text_bio"  class="form-control" placeholder="Text Bio">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Training Tags:</strong>
+                <br>
+               @foreach($tags as $t)
+               @if($t->type == 'training')
+                <input type="checkbox" name="training_type[]" id="{{$t->id}}" value="{{$t->id}}">
+                <label for="option1">{{$t->tag}}</label>
+                @endif
+            <br>
+          @endforeach
+               
             </div>
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-                <strong>Tag:</strong>
-                <select id="exampleSelect"  class="form-control" multiple="multiple" name="tags[]" style="height: 100px">
-                    @foreach( $tags as $tag )
-                    <option value="{{$tag->id}}">{{ $tag->tag }}</option>
-                    @endforeach
-                </select>
-                @error('tag')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
+                <strong>Equipment Tags:</strong>
+                <br>
+               @foreach($tags as $t)
+               @if($t->type == 'equipment')
+                <input type="checkbox" name="tag_equipment[]" id="{{$t->id}}" value="{{$t->id}}">
+                <label for="option1">{{$t->tag}}</label>
+                @endif
+            <br>
+          @endforeach
+               
             </div>
         </div>
-        
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Coach Name:</strong>
+                <select name='coach_id' class="form-control">
+                    <option selected disabled>Select Coach</option>
+                    @foreach ($coach as $w)
+                    <option value="{{$w->id}}">{{$w->name}}</option>  
+                    @endforeach
+                    
+                   </select>
+               
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Duration (week):</strong>
+                <input type="number" name='duration_weeks' class="form-control" placeholder="Duration (weeks)">
+               
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Price (USD):</strong>
+                <input type="number" name='price_usd' class="form-control" placeholder="Price in USD">
+               
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>Level:</strong>
+                <select name='level' class="form-control">
+                    <option selected disabled>Select Level</option>
+                   
+                    <option value="Beginner">Beginner</option>  
+                    <option value="Intermediate">Intermediate</option>  
+                    <option value="Advanced">Advanced</option>  
+                    
+                   </select>
+               
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+
+            <div class="form-group">
+                <strong>Workout:</strong>
+                @foreach($workout as $w)
+                <input type="checkbox" name="number_of_workout[]" id="{{$w->id}}" value="{{$w->id}}">
+                <label for="option1">{{$w->name}}</label>
+            <br>
+          @endforeach
+               
+            </div>
+        </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
                 <button type="submit" class="btn btn-primary">Submit</button>

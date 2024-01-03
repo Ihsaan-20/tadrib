@@ -126,13 +126,13 @@ Route::delete('tags/{tag}', [TagController::class, 'destroy'])->name('tags.destr
 
 
 // Route GymProgramController Controllers
-Route::get('programs', [GymProgramController::class, 'index'])->name('programs.index');
-Route::get('programs/create', [GymProgramController::class, 'create'])->name('programs.create');
-Route::post('programs', [GymProgramController::class, 'store'])->name('programs.store');
-Route::get('programs/{program}', [GymProgramController::class, 'show'])->name('programs.show');
-Route::get('programs/{program}/edit', [GymProgramController::class, 'edit'])->name('programs.edit');
-Route::put('programs/{program}', [GymProgramController::class, 'update'])->name('programs.update');
-Route::delete('programs/{program}', [GymProgramController::class, 'destroy'])->name('programs.destroy');
+Route::get('/program',[GymProgramController::class,'index'])->name('program.index');
+Route::get('/program/create',[GymProgramController::class,'create'])->name('program.create');
+Route::post('/program/store',[GymProgramController::class,'store'])->name('program.store');
+Route::get('/program/show/{id}',[GymProgramController::class,'show'])->name('program.show');
+Route::get('/program/edit/{id}',[GymProgramController::class,'edit'])->name('program.edit');
+Route::put('/program/update/{id}',[GymProgramController::class,'update'])->name('program.update');
+Route::post('/program/delete/{id}',[GymProgramController::class,'destroy'])->name('program.destroy');
 
 
 // Route ExercisesController Controllers

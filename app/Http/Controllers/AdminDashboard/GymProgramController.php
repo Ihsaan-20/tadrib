@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\AdminDashboard;
-
 use App\Http\Controllers\Controller;
 use App\Models\Program;
 use App\Models\Tag;
+use App\Models\User;
+use App\Models\Workout;
 use Illuminate\Http\Request;
 
 class GymProgramController extends Controller
@@ -28,7 +29,9 @@ class GymProgramController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('programs.create', compact('tags'));
+        $coach = User::where('role_id','=',2)->get();
+        $workout = Workout::all();
+        return view('programs.create', compact('tags','coach','workout'));
     }
 
     /**
