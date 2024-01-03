@@ -22,8 +22,10 @@
             <th>No</th>
             <th>Name</th>
             <th>Description</th>
-            <th>progress</th>
-            <th>Tag</th>
+            <th>Text Bio</th>
+            <th>Coach</th>
+            <th>Level</th>
+            <th>Duration (week)</th>
      <th width="280px">Action</th>
         </tr>
         @foreach ($programs as $program)
@@ -31,19 +33,24 @@
             <td>{{++$loop->index}}</td>
             <td>{{ $program->name }}</td>
             <td>{{ $program->description }}</td>
-            <td>{{ $program->progress }}</td>
+            <td>{{ $program->text_bio }}</td>
            {{-- <td>{{ $program->tag->tag }}</td>--}}
            <td>
-                            @foreach($program->tags as $tag)
-                                {{ $tag->tag }}@if(!$loop->last), @endif
-                            @endforeach
+            @php
+            $coach = App\Models\User::find($program->coach_id);
+          
+        @endphp
+                           {{$coach->name}}
                         </td>
+                        <td>{{ $program->level }}</td>
+                        <td>{{ $program->duration_weeks }} weeks</td>
             <td>
-                <form action="{{ route('programs.destroy',$program->id) }}" method="POST">
+
+                <form action="{{ route('program.destroy',$program->id) }}" method="POST">
    
-                    <a class="btn btn-info" href="{{ route('programs.show',$program->id) }}">Show</a>
+                    <a class="btn btn-info" href="{{ route('program.show',$program->id) }}">Show</a>
     
-                    <a class="btn btn-primary" href="{{ route('programs.edit',$program->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('program.edit',$program->id) }}">Edit</a>
    
                     @csrf
                     @method('DELETE')

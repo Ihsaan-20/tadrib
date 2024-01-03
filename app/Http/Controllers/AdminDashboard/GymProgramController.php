@@ -46,22 +46,36 @@ class GymProgramController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'progress' => 'required',
-            'tags' => 'required|array',
-        ]);
+            'introductory_video' => 'required|mimes:mp4,mov,ogg|max:102400',
+            'thumbnail' => 'required|image',
+            'text_bio' => 'required',
+            'training_type' => 'required',
+            'tag_equipment'=>'required',
+            'coach_id'=>'required',
+            'duration_weeks'=>'required',
+            'price_usd'=>'required',
+            'level'=>'required',
+            'number_of_workout'=>'required',
 
-        // Saving logic
-        $program = Program::create([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'progress' => $request->input('progress') ,
         ]);
+$input=$request->all();
+       $video=rand(000000,456423).'.'.$request->introductory_video->extension();
+       $path=$request->introductory_video->storeAs('video',$video,'public');
+       $input['introductory_video']=$path;
+
+       $image=rand(000000,456423).'.'.$request->thumbnail->extension();
+       $path=$request->thumbnail->storeAs('video',$image,'public');
+       $input['thumbnail']=$path;
+
+       $input['training_type']=json_encode($request->training_type);
+       $input['tag_equipment']=json_encode($request->tag_equipment);
+       $input['number_of_workout']=json_encode($request->number_of_workout);
+        $program = Program::create($input);
 
         // Syncing roles
-        $program->tags()->sync($request->input('tags'));
-
+     
         // Redirect to index or show view
-        return redirect()->route('programs.index')->with('success', 'Program created successfully.');
+        return redirect()->route('program.index')->with('success', 'Program created successfully.');
     }
 
     /**
@@ -70,10 +84,13 @@ class GymProgramController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\View\View
      */
-    public function edit(Program $program)
+    public function edit($id)
     {
         $tags = Tag::all();
-        return view('programs.edit', compact('program', 'tags'));
+        $coach = User::where('role_id','=',2)->get();
+        $workout = Workout::all();
+        $program=Program::find($id);
+        return view('programs.edit', compact('tags','coach','workout','program'));
     }
 
     /**
@@ -83,30 +100,52 @@ class GymProgramController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, $id)
     {
         // Validation logic
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'progress' => 'required',
-            'tags' => 'required|array',
+          
+           
+            'text_bio' => 'required',
+            'training_type' => 'required',
+            'tag_equipment'=>'required',
+           
+            'duration_weeks'=>'required',
+            'price_usd'=>'required',
+            'level'=>'required',
+            'number_of_workout'=>'required',
         ]);
-
+$program=Program::find($id);
         // Updating logic
-        $program->update([
-            'name' => $request->input('name'),
-            'description' => $request->input('description'),
-            'progress' => $request->input('progress'),
-        ]);
+       $input=$request->all();
+       if ($request->hasfile('introductory_video')) {
+        $video=rand(000000,456423).'.'.$request->introductory_video->extension();
+       $path=$request->introductory_video->storeAs('video',$video,'public');
+       $input['introductory_video']=$path;
+       }
 
+       if ($request->hasfile('thumbnail')) {
+        $image=rand(000000,456423).'.'.$request->thumbnail->extension();
+        $path=$request->thumbnail->storeAs('video',$image,'public');
+        $input['thumbnail']=$path; 
+       }
+       $input['training_type']=json_encode($request->training_type);
+       $input['tag_equipment']=json_encode($request->tag_equipment);
+       $input['number_of_workout']=json_encode($request->number_of_workout);
+
+$program->update($input);
         //Syncing roles
-        $program->tags()->sync($request->input('tags'));
-
+      
         // Redirect to index or show view
-        return redirect()->route('programs.index')->with('success', 'program updated successfully.');
+        return redirect()->route('program.index')->with('success', 'program updated successfully.');
     }
-
+    public function show($id)
+    {
+        $program = Program::find($id);
+        return view('programs.show',compact('program'));
+    } 
     /**
      * Remove the specified resource from storage.
      *

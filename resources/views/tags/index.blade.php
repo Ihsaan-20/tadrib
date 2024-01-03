@@ -27,6 +27,8 @@
             <th width="280px">Action</th>
         </tr>
         @if($tags)
+
+      
         @foreach ($tags as $tag)
         <tr>
             <td>{{ ++$i }}</td>

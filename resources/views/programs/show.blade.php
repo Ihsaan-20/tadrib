@@ -22,58 +22,59 @@
         </div>
     @endif
   
-    <form action="{{ route('program.update',$program->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-   
+  
          <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $program->name }}" class="form-control" placeholder="Name">
+                    <p>{{ $program->name }}</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Description:</strong>
-                    <input type="text" name="description" value="{{ $program->description }}" class="form-control" placeholder="Description">
+                    <p>
+                    {{ $program->description }}</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Training Tags:</strong>
-                <br>
-                @foreach($tags as $e)
-                @if($e->type == 'training')
-                    <input type="checkbox" name="training_type[]" id="{{$e->id}}" value="{{$e->id}}" 
-                        {{ in_array($e->id, (array)old('exercises', json_decode($program->training_type))) ? 'checked' : '' }}>
-                    <label for="{{$e->id}}">{{$e->tag}}</label>
-                    @endif
-                    <br>
+                
+               
+                @if(json_decode($program->training_type) != null)
+           
+                @foreach(json_decode($program->training_type) as $t)
+                @php
+                
+                    $s=App\Models\Tag::find($t);
+                @endphp
+                <p>{{$s->tag}}</p>
+                    
                 @endforeach
+                @endif
             </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Equipment Tools:</strong>
-               
-                @foreach($tags as $e)
-                @if($e->type == 'equipment')
-                    <input type="checkbox" name="tag_equipment[]" id="{{$e->id}}" value="{{$e->id}}" 
-                        {{ in_array($e->id, (array)old('exercises', json_decode($program->tag_equipment))) ? 'checked' : '' }}>
-                    <label for="{{$e->id}}">{{$e->tag}}</label>
-                    @endif
-                    <br>
+               @if(json_decode($program->tag_equipment) != null)
+                @foreach(json_decode($program->tag_equipment) as $t)
+                @php
+                
+                    $s=App\Models\Tag::find($t);
+                @endphp
+                <p>{{$s->tag}}</p>
+                  
                 @endforeach
+                @endif
             </div>
             </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
-                <div class="form-group">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                
                     <strong>Introductory video:</strong>
-                    <input type="file" name="introductory_video" value="{{$program->introductory_video}}" class="form-control">
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+                  
+          
                 <div class="form-group"><br>
                     @if($program->introductory_video)
                     <video width="150px" height="100px" controls>
@@ -86,12 +87,10 @@
             </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3">
-                <div class="form-group">
+               
                     <strong>Thumbnail:</strong>
-                    <input type="file" name="thumbnail" value="{{$program->thumbnail}}" class="form-control">
-                </div>
-            </div>
-            <div class="col-xs-3 col-sm-3 col-md-3">
+                   
+           
                 <div class="form-group"><br>
                     @if($program->thumbnail)
                    
@@ -106,27 +105,25 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Coach Name:</strong>
-                    <select name='coach_id' class="form-control">
-                        <option selected disabled>Select Coach</option>
-                        @foreach ($coach as $w)
-                        <option value="{{$w->id}}">{{$w->name}}</option>  
-                        @endforeach
-                        
-                       </select>
+                    @php
+                    $coach = App\Models\User::find($program->coach_id);
+                  
+                @endphp
+                                   {{$coach->name}}
                    
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Duration (week):</strong>
-                    <input type="number" name='duration_weeks' class="form-control" value="{{$program->duration_weeks}}" placeholder="Duration (weeks)">
+                    <p>{{$program->duration_weeks}}</p>
                    
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Price (USD):</strong>
-                    <input type="number" name='price_usd' value="{{$program->price_usd}}"  class="form-control" placeholder="Price in USD">
+                    <p>{{$program->price_usd}}</p>
                    
                 </div>
             </div>
@@ -134,21 +131,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Level:</strong>
-                    <select name='level' class="form-control">
-                        <option selected value='{{$program->level}}'>Select Level</option>
-                       
-                        <option value="Beginner">Beginner</option>  
-                        <option value="Intermediate">Intermediate</option>  
-                        <option value="Advanced">Advanced</option>  
-                        
-                       </select>
+                    <p>{{$program->level}}</p>
                    
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Text Bio:</strong>
-                    <input type="textarea" name="text_bio" value="{{$program->text_bio}}"  class="form-control" placeholder="Text Bio">
+                    <p>{{$program->text_bio}}</p>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
@@ -156,20 +146,20 @@
                 <div class="form-group">
                     <strong>Workouts:</strong>
                    
-                    @foreach($workout as $e)
-                  
-                        <input type="checkbox" name="number_of_workout[]" id="{{$e->id}}" value="{{$e->id}}" 
-                            {{ in_array($e->id, (array)old('workouts', json_decode($program->number_of_workout))) ? 'checked' : '' }}>
-                        <label for="{{$e->id}}">{{$e->name}}</label>
-                     
-                        <br>
+                    @if(json_decode($program->number_of_workout) != null)
+                    @foreach(json_decode($program->number_of_workout) as $t)
+                    @php
+                    
+                        $tag=App\Models\Workout::find($t);
+                    @endphp
+                    <p>{{$tag->name}}</p>
+                        
                     @endforeach
+                    @endif
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+           
         </div>
    
-    </form>
+   
 @endsection

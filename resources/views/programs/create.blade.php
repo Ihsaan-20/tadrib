@@ -24,7 +24,7 @@
     </div>
 @endif
    
-<form action="{{ route('program.store') }}" method="POST">
+<form action="{{ route('program.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
   
      <div class="row">
@@ -48,13 +48,13 @@
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6">
-            < <div class="form-group">
+             <div class="form-group">
                 <strong>Thumbnail:</strong>
                 <input type="file"  name='thumbnail' class="form-control" placeholder="Thumbnail">
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
-            < <div class="form-group">
+            <div class="form-group">
                 <strong>Text Bio:</strong>
                 <input type="textarea" name="text_bio"  class="form-control" placeholder="Text Bio">
             </div>
@@ -68,7 +68,7 @@
                 <input type="checkbox" name="training_type[]" id="{{$t->id}}" value="{{$t->id}}">
                 <label for="option1">{{$t->tag}}</label>
                 @endif
-            <br>
+                <br>
           @endforeach
                
             </div>
@@ -137,6 +137,7 @@
 
             <div class="form-group">
                 <strong>Workout:</strong>
+                <br>
                 @foreach($workout as $w)
                 <input type="checkbox" name="number_of_workout[]" id="{{$w->id}}" value="{{$w->id}}">
                 <label for="option1">{{$w->name}}</label>
