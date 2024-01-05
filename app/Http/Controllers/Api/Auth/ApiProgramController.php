@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Program;
+use App\Models\Tag;
+use App\Models\Workout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,8 +27,43 @@ class ApiProgramController extends Controller
         }
 
         $Programs = $query->latest()->get();
-
+$train=[];
+$equip=[];
+$work=[];
         if ($Programs->isNotEmpty()) {
+            foreach($Programs as $p){
+                $training=json_decode($p->training_type);
+                foreach($training as $t){
+                    $tag=Tag::find($t);
+                  
+                    $train[]=$tag->tag;
+                }
+               
+                $p['training_type']=$train;
+
+
+                $equipment=json_decode($p->tag_equipment);
+                foreach($equipment as $t){
+                    $tag=Tag::find($t);
+                  
+                    $equip[]=$tag->tag;
+                }
+               
+                $p['tag_equipment']=$equip;
+
+
+                $workout=json_decode($p->number_of_workout);
+                foreach($workout as $t){
+                    $tag=Workout::find($t);
+                  
+                    $work[]=$tag->name;
+                }
+               
+                $p['number_of_workout']=$work;
+               
+            }
+
+
             return response()->json([
                 'status' => 200,
                 'message' => 'Data fetched',

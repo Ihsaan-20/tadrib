@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
+use App\Http\Controllers\Api\Auth\MessageController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\ApiCoachController;
@@ -59,3 +59,6 @@ Route::delete('/delete-program/{id}', [ApiProgramController ::class, 'destroyPro
 
 
 
+Route::post('/send-chat/{id}',[MessageController::class,'sendMessage']);
+Route::post('/get-chat/{receiverId}/{sender_Id}',[MessageController::class,'getMessages']);
+Route::get('/getChats/{id}/{program_id}',[MessageController::class,'getChats']);
