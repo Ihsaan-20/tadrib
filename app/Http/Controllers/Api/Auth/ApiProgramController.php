@@ -84,28 +84,35 @@ $work=[];
      */
     public function storeNewProgram(Request $request)
     {
-        $validator = validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'progress' => 'required',
+            'introductory_video' => 'required|mimes:mp4,mov,ogg|max:102400',
+            'thumbnail' => 'required|image',
+            'text_bio' => 'required',
+            'training_type' => 'required',
+            'tag_equipment'=>'required',
+            'coach_id'=>'required',
+            'duration_weeks'=>'required',
+            'price_usd'=>'required',
+            'level'=>'required',
+            'number_of_workout'=>'required',
+
         ]);
+$input=$request->all();
+       $video=rand(000000,456423).'.'.$request->introductory_video->extension();
+       $path=$request->introductory_video->storeAs('video',$video,'public');
+       $input['introductory_video']=$path;
 
-        if($validator->fails())
-        {
-            return response()->json([
-                'status' => 422,
-                'errors' => $validator->messages(),
-            ], 422);
-        }
-        else
-        {
-            $programs = Program::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'progress' => $request->progress,
-            ]);
+       $image=rand(000000,456423).'.'.$request->thumbnail->extension();
+       $path=$request->thumbnail->storeAs('video',$image,'public');
+       $input['thumbnail']=$path;
 
-            if($programs)
+       $input['training_type']=json_encode($request->training_type);
+       $input['tag_equipment']=json_encode($request->tag_equipment);
+       $input['number_of_workout']=json_encode($request->number_of_workout);
+        $program = Program::create($input);
+            if($program)
             {
                 return response()->json([
                     'status' => 200,
@@ -120,7 +127,7 @@ $work=[];
                 ], 500);
             }
         }
-    }
+    
 
     /**
      * Display the specified resource.
@@ -128,8 +135,38 @@ $work=[];
     public function showProgram($id)
     {
         $program = Program::find($id);
-
+        $train=[];
+        $equip=[];
+        $work=[];
         if ($program) {
+            $training=json_decode($program->training_type);
+            foreach($training as $t){
+                $tag=Tag::find($t);
+              
+                $train[]=$tag->tag;
+            }
+           
+            $program['training_type']=$train;
+
+
+            $equipment=json_decode($program->tag_equipment);
+            foreach($equipment as $t){
+                $tag=Tag::find($t);
+              
+                $equip[]=$tag->tag;
+            }
+           
+            $program['tag_equipment']=$equip;
+
+
+            $workout=json_decode($program->number_of_workout);
+            foreach($workout as $t){
+                $tag=Workout::find($t);
+              
+                $work[]=$tag->name;
+            }
+           
+            $program['number_of_workout']=$work;
             return response()->json([
                 'status' => 200,
                 'message' => 'Program record is available!',

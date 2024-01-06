@@ -14,6 +14,7 @@ class DataController extends Controller
     {
         // return response()->json(['status' => true, ',msg' => 'Okay']);
         $Coachs = Coach::latest()->get();
+        
 
         if ($Coachs->isNotEmpty()) {
             return response()->json([

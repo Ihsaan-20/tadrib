@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coach;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +18,7 @@ class ApiCoachController extends Controller
     {
         $keyword = $request->input('search');
 
-        $query = Coach::query();
+        $query = User::query();
 
         if ($keyword) {
             $query->where('name', 'like', "%$keyword%")
@@ -26,8 +28,24 @@ class ApiCoachController extends Controller
         }
 
         $coachs = $query->latest()->get();
-
+        $train=[];
         if ($coachs->isNotEmpty()) {
+            foreach($coachs as $c){
+              
+                $training=json_decode($c->tags);
+                if($training != null){
+                    foreach($training as $t){
+                        $tag=Tag::find($t);
+                      
+                        $train[]=$tag->tag;
+                    }
+                   
+                    $c['tags']=$train;
+                }else{
+                    $c['tags']=null;
+                }
+               
+            }
             return response()->json([
                 'status' => 200,
                 'message' => 'Data fetched',
@@ -46,28 +64,27 @@ class ApiCoachController extends Controller
      */
     public function storeNewCoach(Request $request)
     {
-        $validator = validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
             'phone_number' => 'required',
-            'bio' => 'required'
+            'bio' => 'required',
+            'tags.*'=>'required',
+            'password'=>'required|confirmed',
         ]);
-
-        if($validator->fails())
-        {
-            return response()->json([
-                'status' => 422,
-                'errors' => $validator->messages(),
-            ], 422);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        else
-        {
-            $Coachs = Coach::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone_number' => $request->phone_number,
-                'bio' => $request->bio
-            ]);
+    
+        $input=$request->all();
+        $input['tags']=json_encode($request->tags);
+        $input['name']=$input['first_name'].' '.$input['last_name'];
+        $input['role']='coach';
+        $input['role_id']=2;
+        
+  
+        $Coachs=User::create($input);
 
             if($Coachs)
             {
@@ -84,16 +101,28 @@ class ApiCoachController extends Controller
                 ], 500);
             }
         }
-    }
+    
 
     /**
      * Display the specified resource.
      */
     public function showCoach($id)
     {
-        $coachs = Coach::find($id);
+        $coachs = User::find($id);
 
         if ($coachs) {
+            $training=json_decode($coachs->tags);
+            if($training != null){
+                foreach($training as $t){
+                    $tag=Tag::find($t);
+                  
+                    $train[]=$tag->tag;
+                }
+               
+                $coachs['tags']=$train;
+            }else{
+                $coachs['tags']=null;
+            }
             return response()->json([
                 'status' => 200,
                 'message' => 'Coach record is available!',
@@ -137,13 +166,13 @@ class ApiCoachController extends Controller
      */
     public function updateCoachData(Request $request,$id)
     {
-        $validator = validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required',
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
             'phone_number' => 'required',
-            'bio' => 'required'
+            'bio' => 'required',
         ]);
-
         if($validator->fails())
         {
             return response()->json([
@@ -151,34 +180,42 @@ class ApiCoachController extends Controller
                 'errors' => $validator->messages(),
             ], 422);
         }
-        else
-        {
-            $Coach = Coach::find($id);
+     
+        $input= $request->all();
+       
+        $Coach = User::find($id);
+      
+        
+        if ($request->hasfile('profile_picture')) {
 
-
-            if($Coach)
-            {
-                $Coach->update([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                    'phone_number' => $request->phone_number,
-                    'bio' => $request->bio
-                ]);
-
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Coach updated successfully!',
-                ], 200);
-            }
-            else
-            {
-                return response()->json([
-                    'status' => 404,
-                    'message' => 'Coach record not found!',
-                ], 404);
-            }
+            $image = rand(0000, 53453454) . '.' . $request->profile_picture->extension();
+            $path = $request->profile_picture->storeAs('profile', $image, 'public');
+            $input['profile_picture'] = $path;
+        }else if($request->filled('profile_picture')){
+            $input['profile_picture'] =$request->profile_picture;
         }
+        if($request->tags){
+            $input['tags'] = json_encode($request->tags);
+        }
+        $input['name']=$input['first_name'].' '.$input['last_name'];
+        
+        
+        if($Coach){
+        $Coach->update($input);
+        return response()->json([
+            'status' => 200,
+            'message' => 'Coach updated successfully!',
+        ], 200);
     }
+    else
+    {
+        return response()->json([
+            'status' => 404,
+            'message' => 'Coach record not found!',
+        ], 404);
+    }
+        }
+    
 
     /**
      * Remove the specified resource from storage.

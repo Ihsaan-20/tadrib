@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\ApiClientController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +9,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\ApiCoachController;
 use App\Http\Controllers\Api\Auth\ApiProgramController;
-
+use App\Http\Controllers\Api\Auth\ApiTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,20 +45,26 @@ Route::post('/verify-password-reset', [LoginController::class, 'verifyForgetPass
 Route::get('/get-all-coachs', [ApiCoachController ::class, 'getAllCoachs'])->name('getAllCoachs');
 Route::post('/coach-store', [ApiCoachController ::class, 'storeNewCoach'])->name('storeNewCoach');
 Route::get('/show-coach/{id}', [ApiCoachController ::class, 'showCoach'])->name('showCoach');
-Route::get('/edit-coach/{id}', [ApiCoachController ::class, 'editCoachData'])->name('editCoachData');
-Route::put('/update-coach/{id}', [ApiCoachController ::class, 'updateCoachData'])->name('updateCoachData');
-Route::delete('/delete-coach/{id}', [ApiCoachController ::class, 'destroyCoach'])->name('destroyCoach');
+Route::post('/edit-coach/{id}', [ApiCoachController ::class, 'editCoachData'])->name('editCoachData');
+Route::post('/update-coach/{id}', [ApiCoachController ::class, 'updateCoachData'])->name('updateCoachData');
+Route::post('/delete-coach/{id}', [ApiCoachController ::class, 'destroyCoach'])->name('destroyCoach');
 
 // ProgramApi's
 Route::get('/get-all-Programs', [ApiProgramController ::class, 'getAllPrograms'])->name('getAllPrograms');
 Route::post('/program-store', [ApiProgramController ::class, 'storeNewProgram'])->name('storeNewProgram');
 Route::get('/show-program/{id}', [ApiProgramController ::class, 'showProgram'])->name('showProgram');
 Route::get('/edit-program/{id}', [ApiProgramController ::class, 'editProgramData'])->name('editProgramData');
-Route::put('/update-program/{id}', [ApiProgramController ::class, 'updateProgramData'])->name('updateProgramData');
-Route::delete('/delete-program/{id}', [ApiProgramController ::class, 'destroyProgram'])->name('destroyProgram');
+Route::post('/update-program/{id}', [ApiProgramController ::class, 'updateProgramData'])->name('updateProgramData');
+Route::post('/delete-program/{id}', [ApiProgramController ::class, 'destroyProgram'])->name('destroyProgram');
 
+Route::get('/get-user-id/{id}', [ApiClientController ::class, 'get_user_id'])->name('get_user_id');
+Route::post('/edit-user-id/{id}', [ApiClientController ::class, 'edit_user_id'])->name('edit_user_id');
 
-
+Route::get('/get-all-tags', [ApiTagController::class, 'get_all_tags'])->name('get_all_tags');
+Route::get('/get-tag-id/{id}', [ApiTagController ::class, 'get_tag_id'])->name('get_tag_id');
+Route::post('/store-tags', [ApiTagController ::class, 'store_tags'])->name('store_tags');
+Route::post('/edit-tags', [ApiTagController ::class, 'edit_tags'])->name('edit_tags');
+Route::post('/delete-tags', [ApiTagController ::class, 'delete_tags'])->name('delete_tags');
 
 Route::post('/send-chat/{id}',[MessageController::class,'sendMessage']);
 Route::post('/get-chat/{receiverId}/{sender_Id}',[MessageController::class,'getMessages']);
