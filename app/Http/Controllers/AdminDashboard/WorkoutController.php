@@ -49,8 +49,8 @@ class WorkoutController extends Controller
             'text_bio' => 'required',
             'estimated_duration_hours' => 'required',
             'rest' => 'required',
-            'tags.*' => 'required',
-            'number_of_exercises.*' => 'required',
+            'tags' => 'required',
+            'number_of_exercises' => 'required',
         ]);
 
 

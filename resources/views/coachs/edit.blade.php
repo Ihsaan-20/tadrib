@@ -51,7 +51,7 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Phone Number:</strong>
-                    <input type="text" name="phone_number" value="{{ $coach->phone_number }}" class="form-control" placeholder="Phone_Number">
+                    <input type="text" name="phone_number" value="{{ $coach->phone_number }}" class="phone_number form-control" placeholder="Phone_Number">
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">

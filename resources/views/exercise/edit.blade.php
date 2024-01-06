@@ -46,7 +46,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Repetitions:</strong>
-                            <input type="number" name="repetitions" value="{{ $exercise->repetitions }}" class="form-control" placeholder="Repetitions">
+                            <input type="text" name="repetitions" value="{{ $exercise->repetitions }}" class="phone_number form-control" placeholder="Repetitions">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">

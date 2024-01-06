@@ -167,3 +167,6 @@ Route::post('/set/delete/{id}',[GymSetController::class,'destroy'])->name('set.d
 
 
 
+
+
+

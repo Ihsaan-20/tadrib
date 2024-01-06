@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('no_of_time');
             $table->integer('intra_set_rest');
             $table->integer('inter_set_rest');
-            $table->float('estimated_duration');
+            $table->string('estimated_duration');
             $table->foreignId('workout_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -29,12 +29,7 @@
                 <p>TAGS</p>
             </a>
         </li>
-        <li>
-            <a class="nav-link" href="{{route('program.index')}}">
-                <i class="nc-icon nc-circle-09"></i>
-                <p>Program</p>
-            </a>
-        </li>
+      
         <li>
             <a class="nav-link" href="{{route('exercises.index')}}">
                 <i class="nc-icon nc-notes"></i>
@@ -53,13 +48,14 @@
                 <p>Set</p>
             </a>
         </li>
-
         <li>
-            <a class="nav-link" href="#" onclick="alert('not working')">
-                <i class="nc-icon nc-atom"></i>
-                <p>CHAT</p>
+            <a class="nav-link" href="{{route('program.index')}}">
+                <i class="nc-icon nc-circle-09"></i>
+                <p>Program</p>
             </a>
         </li>
+
+      
         {{-- <li>
             <a class="nav-link" href="./maps.html">
                 <i class="nc-icon nc-pin-3"></i>

@@ -24,7 +24,7 @@
    
 <div class="row">
     <div class="col-12">
-        <form action="{{ route('workout.store') }}" method="POST">
+        <form action="{{ route('workout.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
           
              <div class="row">
@@ -40,12 +40,23 @@
                         <input type="file" name="introductory_video" value="{{ old('introductory_video') }}" class="form-control">
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6">
+                {{-- <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Bio:</strong>
                         <input type="text" name="text_bio" value="{{ old('text_bio') }}" class="form-control" placeholder="text bio">
                     </div>
+                </div> --}}
+
+
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Bio:</strong>
+                        <!-- Replace input with textarea and set rows, cols, and maxlength attributes -->
+                        <textarea name="text_bio" class="form-control" rows="4" cols="100" maxlength="100" placeholder="text bio">{{ old('text_bio') }}</textarea>
+                    </div>
                 </div>
+                
+                
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Estimated Duration:</strong>
@@ -56,7 +67,7 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Rest (in days):</strong>
-                        <input type="number" name="rest" value="{{ old('rest') }}" class="form-control" placeholder="Rest">
+                        <input type="text" name="rest" value="{{ old('rest') }}" class="phone_number form-control" placeholder="Rest">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">

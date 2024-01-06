@@ -31,7 +31,15 @@
             @foreach ($set as $s)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{$s->set_type}}</td>
+            <td>
+                @if($s->set_type === 'super_set')
+                Super Set
+                @else
+                Set
+                @endif
+                {{-- {{$s->set_type}} --}}
+            
+            </td>
             <td>{{$s->workout_name}}</td>
             <td>{{$s->estimated_duration}}</td>
             <td>{{$s->inter_set_rest}}</td>

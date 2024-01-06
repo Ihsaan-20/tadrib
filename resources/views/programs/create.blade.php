@@ -37,7 +37,8 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Description:</strong>
-                <input type="text" name="description" class="form-control" placeholder="Description">
+                <!-- Use textarea for multiline input -->
+                <textarea name="description" class="form-control" placeholder="Description"></textarea>
             </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
@@ -56,9 +57,11 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Text Bio:</strong>
-                <input type="textarea" name="text_bio"  class="form-control" placeholder="Text Bio">
+                <!-- Use textarea for multiline input -->
+                <textarea name="text_bio" class="form-control" placeholder="Text Bio"></textarea>
             </div>
         </div>
+        
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Training Tags:</strong>
@@ -106,7 +109,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Duration (week):</strong>
-                <input type="number" name='duration_weeks' class="form-control" placeholder="Duration (weeks)">
+                <input type="text" name='duration_weeks' class="phone_number form-control" placeholder="Duration (weeks)">
                
             </div>
         </div>
@@ -114,7 +117,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Price (USD):</strong>
-                <input type="number" name='price_usd' class="form-control" placeholder="Price in USD">
+                <input type="text" name='price_usd' class="phone_number form-control" placeholder="Price in USD">
                
             </div>
         </div>

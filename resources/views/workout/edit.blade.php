@@ -68,7 +68,7 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Rest (in days):</strong>
-                        <input type="number" name="rest" value="{{ old('rest', $workout->rest) }}" class="form-control" placeholder="Rest">
+                        <input type="number" name="rest" value="{{ old('rest', $workout->rest) }}" class="phone_number form-control" placeholder="Rest">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6"></div>

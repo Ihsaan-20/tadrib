@@ -119,14 +119,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Duration (week):</strong>
-                    <input type="number" name='duration_weeks' class="form-control" value="{{$program->duration_weeks}}" placeholder="Duration (weeks)">
+                    <input type="text" name='duration_weeks' class="phone_number form-control" value="{{$program->duration_weeks}}" placeholder="Duration (weeks)">
                    
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Price (USD):</strong>
-                    <input type="number" name='price_usd' value="{{$program->price_usd}}"  class="form-control" placeholder="Price in USD">
+                    <input type="text" name='price_usd' value="{{$program->price_usd}}"  class="phone_number form-control" placeholder="Price in USD">
                    
                 </div>
             </div>
