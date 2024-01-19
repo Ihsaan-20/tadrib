@@ -14,16 +14,33 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Exercises:</strong>
-                        @foreach (json_decode($set->exercises) as $e)
-                            @php
-                                $tag = App\Models\Excercise::find($e);
-                            @endphp
-                        
-                            @if ($tag)
-                                <p>{{ $tag->name }}</p>
-                                
-                            @endif
-                        @endforeach
+                        {{-- @php
+                        use App\Models\Exercise;
+                    @endphp
+                    
+                    @foreach (json_decode($set->exercises) as $e)
+                        @php
+                            // Convert $e to integer to handle both string and integer IDs
+                            $exerciseId = (int)$e;
+                            
+                            $tag = Exercise::find($exerciseId);
+                    
+                            // Skip if $tag is null
+                            if (!$tag) continue;
+                        @endphp
+                    
+                        <p>{{ $tag->name }}</p>
+                    @endforeach
+                     --}}
+                     @if($exerciseNames)
+                     @foreach ($exerciseNames as $e)
+                     <ul>
+                        <li>{{$e}}</li>
+                     </ul>
+                 
+                     @endforeach
+                     @endif
+                    
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">

@@ -54,28 +54,28 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>No# of time:</strong>
-                        <input type="number" name="no_of_time" class="form-control" placeholder="Number of Time">
+                        <input type="text" name="no_of_time" class="phone_number form-control" placeholder="Number of Time">
                     </div>
                 </div>
         
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Inter Set:</strong>
-                        <input type="number" name="inter_set_rest" class="form-control" placeholder="Inter Rest">
+                        <input type="text" name="inter_set_rest" class="phone_number form-control" placeholder="Inter Rest">
                     </div>
                 </div>
                 
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Intra Set:</strong>
-                        <input type="number" name="intra_set_rest" class="form-control" placeholder="Intra Rest">
+                        <input type="text" name="intra_set_rest" class="phone_number form-control" placeholder="Intra Rest">
                     </div>
                 </div>
                 
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Duration of Set:</strong>
-                        <input type="time" name="estimated_duration" class="form-control" placeholder="Duration of Set">
+                        <input type="text" name="estimated_duration" class="duration form-control" placeholder="02:30">
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">

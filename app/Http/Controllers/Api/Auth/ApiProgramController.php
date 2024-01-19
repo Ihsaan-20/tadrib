@@ -97,6 +97,7 @@ $work=[];
             'price_usd'=>'required',
             'level'=>'required',
             'number_of_workout'=>'required',
+            'external_video'=>'required',
 
         ]);
 $input=$request->all();
@@ -231,7 +232,7 @@ $input=$request->all();
                 $Program->update([
                     'name' => $request->name,
                     'description' => $request->description,
-                    'progress' => $request->progress,
+                    
                 ]);
 
                 return response()->json([

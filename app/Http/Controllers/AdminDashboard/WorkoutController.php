@@ -31,7 +31,8 @@ class WorkoutController extends Controller
     {
         $tags = Tag::where('type', 'equipment')->get();
         $exercises = Exercise::all();
-        return view('workout.create', compact('tags', 'exercises'));
+        $coach = User::where('role_id','=',2)->get();
+        return view('workout.create', compact('tags', 'exercises','coach'));
     }
 
     /**
@@ -49,8 +50,9 @@ class WorkoutController extends Controller
             'text_bio' => 'required',
             'estimated_duration_hours' => 'required',
             'rest' => 'required',
-            'tags.*' => 'required',
-            'number_of_exercises.*' => 'required',
+            'coach_id'=>'required',
+            'tags' => 'required',
+            'number_of_exercises' => 'required',
         ]);
 
 
@@ -118,10 +120,10 @@ class WorkoutController extends Controller
     {
 
         $tags = Tag::where('type', 'equipment')->get();
-
+        $coach = User::where('role_id','=',2)->get();
         $exercises = Exercise::all();
         $workout = Workout::find($id);
-        return view('workout.edit', compact('tags', 'exercises', 'workout'));
+        return view('workout.edit', compact('tags', 'exercises', 'workout','coach'));
     }
 
     /**
@@ -138,6 +140,7 @@ class WorkoutController extends Controller
             'text_bio' => 'required',
             'estimated_duration_hours' => 'required',
             'rest' => 'required',
+             'coach_id'=>'required',
             'tags.*' => 'required',
             'number_of_exercises.*' => 'required',
         ]);
@@ -178,10 +181,11 @@ class WorkoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+  public function destroy($id)
     {
-        $coach = User::find($id);
-        $coach->delete();
+      
+        $workout = Workout::find($id);
+        $workout->delete();
 
         return redirect()->route('coachs.index')
             ->with('success', 'Coach deleted successfully');

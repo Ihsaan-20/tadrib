@@ -18,6 +18,7 @@ class Program extends Model
         'description',
         'progress',
         'introductory_video',
+        'external_video',
         'thumbnail',
         'text_bio',
         'training_type',

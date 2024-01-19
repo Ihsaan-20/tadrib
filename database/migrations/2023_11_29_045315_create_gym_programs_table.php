@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('progress');
+            $table->string('progress')->nullable();
 
             $table->text('introductory_video')->nullable();
+            $table->text('external_video')->nullable();
             $table->text('thumbnail')->nullable();
             $table->text('text_bio')->nullable();
             $table->json('training_type')->nullable();

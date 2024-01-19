@@ -18,6 +18,7 @@
     <link href="{{ asset('frontend/css/light-bootstrap-dashboard.css') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('frontend/css/demo.css') }}" rel="stylesheet" />
+    
 </head>
 
 <body>
@@ -86,6 +87,52 @@
 
 
 @yield('customJs')
+
+<!-- Include jQuery in your HTML file if not already included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@yield('main-js')
+<script>
+  $(document).ready(function() {
+    // Attach an input event listener to the phone_number field
+        $('.phone_number').on('input', function() {
+        // Remove non-numeric characters from the input
+        var phoneNumber = $(this).val().replace(/\D/g, '');
+
+        // Limit the input to 15 characters
+        phoneNumber = phoneNumber.substring(0, 15);
+
+        // Update the input value
+        $(this).val(phoneNumber);
+        });
+
+
+   // Attach an input event listener to the duration field
+   $('.duration').on('input', function() {
+      // Get the entered value
+      var duration = $(this).val();
+
+      // Remove non-numeric characters from the input
+      var numericValue = duration.replace(/\D/g, '');
+
+      // Format the numeric value to "HH:mm"
+      var formattedValue = numericValue.replace(/(\d{2})(\d{2})/, '$1:$2');
+
+      // Limit the input to 5 characters, including the colon
+      formattedValue = formattedValue.substring(0, 5);
+
+      // Update the input value
+      $(this).val(formattedValue);
+    });
+
+  });
+</script>
+
+
+
+
+
+
+
 <script src="{{ asset('frontend/js/core/popper.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('frontend/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
 <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->

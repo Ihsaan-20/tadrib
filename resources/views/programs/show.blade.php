@@ -2,7 +2,7 @@
 @section('app')
     <div class="row">
         <div class="col-md-10">
-            <h2 >Edit Program</h2>
+            <h2 > Program Details</h2>
         </div>
         <div class="col-md-2 ">
             <div class="float-right">
@@ -101,7 +101,21 @@
                     @endif
                 </div>
             </div>
-
+   <div class="col-xs-6 col-sm-6 col-md-6">
+                
+                    <strong>Introductory video:</strong>
+                  
+          
+                <div class="form-group"><br>
+                    @if($program->external_video)
+                   <a href="{{ $program->external_video }}"> <video width="150px" height="100px" controls>
+                        <source src="{{ $program->external_video }}" >
+                    </video></a>
+                        @else
+                            <img src="{{ asset('images/not.jpg')}}" style="width:70px; height:40px" alt="User" />
+                    @endif
+                </div>
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Coach Name:</strong>
@@ -109,10 +123,12 @@
                     $coach = App\Models\User::find($program->coach_id);
                   
                 @endphp
-                                   {{$coach->name}}
+                                  @if($coach) {{$coach->name}}@endif
                    
                 </div>
             </div>
+            
+          
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Duration (week):</strong>

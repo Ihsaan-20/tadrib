@@ -46,13 +46,26 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Repetitions:</strong>
-                            <input type="number" name="repetitions" value="{{ $exercise->repetitions }}" class="form-control" placeholder="Repetitions">
+                            <input type="text" name="repetitions" value="{{ $exercise->repetitions }}" class="phone_number form-control" placeholder="Repetitions">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Description Video:</strong>
                             <input type="file" name="video" class="form-control">
+                        </div>
+                    </div>
+                      <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <strong>Coach Name:</strong>
+                            <select name='coach_id' class="form-control">
+                                <option selected disabled>Select Coach</option>
+                                @foreach ($coach as $w)
+                                    <option value="{{ $w->id }}" @if ($exercise->coach_id == $w->id) selected @endif>
+                                        {{ $w->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">

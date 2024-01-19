@@ -12,6 +12,7 @@ class Exercise extends Model
         'name',
         'description_video',
         'text_bio',
+        'coach_id',
         'repetitions',
         // Add other fields as needed
     ];

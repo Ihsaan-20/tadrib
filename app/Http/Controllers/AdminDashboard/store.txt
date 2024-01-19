@@ -1,0 +1,289 @@
+    // Assuming you have a Program model
+
+    // $program = [
+    //     'id' => 0,
+    //     'name' => 'Program name',
+    //     'workouts' => [
+    //         [
+    //             'id' => 0,
+    //             'name' => 'Workout 1',
+    //             'sets' => [
+    //                 [
+    //                     'id' => 0,
+    //                     'name' => 'Set 1',
+    //                     'exercise' => [
+    //                         [
+    //                             'id' => 0,
+    //                             'name' => 'Exercise 1'
+    //                         ],
+    //                         [
+    //                             'id' => 1,
+    //                             'name' => 'Exercise 2'
+    //                         ]
+    //                     ]
+    //                 ],
+    //                 [
+    //                     'id' => 1,
+    //                     'name' => 'Set 2',
+    //                     'exercise' => [
+    //                         [
+    //                             'id' => 2,
+    //                             'name' => 'Exercise 3'
+    //                         ],
+    //                         [
+    //                             'id' => 3,
+    //                             'name' => 'Exercise 4'
+    //                         ]
+    //                     ]
+    //                 ]
+    //             ]
+    //         ],
+    //         [
+    //             'id' => 1,
+    //             'name' => 'Workout 2',
+    //             'sets' => [
+    //                 [
+    //                     'id' => 0,
+    //                     'name' => 'Set 1',
+    //                     'exercise' => [
+    //                         [
+    //                             'id' => 4,
+    //                             'name' => 'Exercise 5'
+    //                         ],
+    //                         [
+    //                             'id' => 5,
+    //                             'name' => 'Exercise 6'
+    //                         ]
+    //                     ]
+    //                 ],
+    //                 [
+    //                     'id' => 1,
+    //                     'name' => 'Set 2',
+    //                     'exercise' => [
+    //                         [
+    //                             'id' => 6,
+    //                             'name' => 'Exercise 7'
+    //                         ],
+    //                         [
+    //                             'id' => 7,
+    //                             'name' => 'Exercise 8'
+    //                         ]
+    //                     ]
+    //                 ]
+    //             ]
+    //         ]
+    //     ]
+    // ];
+    
+
+    $programModel = new ProgramWithExerciseSet();
+    $programModel->program = json_encode($program);
+    $programModel->save();
+    return response()->json(['message' => 'Data stored successfully']);
+
+
+
+    // $programData = [
+    //     'program_name' => [$request->input('program_name')],
+    //     'program_intro_video' => [$request->input('program_intro_video')],
+    //     'program_text_bio' => [$request->input('program_text_bio')],
+    //     'program_equi_needed' => [$request->input('program_equi_needed')],
+    //     'program_training_type' => [$request->input('program_training_type')],
+    //     'coach_id' => [$request->input('coach_id')],
+    //     'program_profile' => [$request->input('program_profile')],
+    //     'program_duration' => [$request->input('program_duration')],
+    //     'program_level' => [$request->input('program_level')],
+    //     'program_price' => [$request->input('program_price')],
+    //     'workout_text_bio' => [$request->input('workout_text_bio')],
+    //     'workout_training_type' => [$request->input('workout_training_type')],
+    //     'workout_equi_needed' => [$request->input('workout_equi_needed')],
+    //     'workout_estimated_duration' => [$request->input('workout_estimated_duration')],
+    //     'workout_rest_days' => [$request->input('workout_rest_days')],
+    //     'workout_number_of_exercises' => [$request->input('workout_number_of_exercises')],
+    //     'set_exercises' => [$request->input('set_exercises')],
+    //     'set_number_of_time_set' => [$request->input('set_number_of_time_set')],
+    //     'set_intra_set_rest' => [$request->input('set_intra_set_rest')],
+    //     'set_inter_set_rest' => [$request->input('set_inter_set_rest')],
+    //     'set_duration_set' => [$request->input('set_duration_set')],
+    //     'exercise_text_bio' => [$request->input('exercise_text_bio')],
+    //     'exercise_number_of_repeat' => [$request->input('exercise_number_of_repeat')],
+    // ];
+    
+    // foreach ($request->input('workout_name') as $index => $workoutName) {
+    //     $workout = [
+    //         'workout_name' => $workoutName[0],
+    //         'workout_text_bio' => $request->input('workout_text_bio')[$index][0] ?? null,
+    //         'workout_training_type' => $request->input('workout_training_type')[$index] ?? null,
+    //         'workout_equi_needed' => $request->input('workout_equi_needed')[$index] ?? null,
+    //         'workout_estimated_duration' => $request->input('workout_estimated_duration')[$index] ?? null,
+    //         'workout_rest_days' => $request->input('workout_rest_days')[$index] ?? null,
+    //         'workout_number_of_exercises' => $request->input('workout_number_of_exercises')[$index] ?? null,
+    //         'sets' => [],
+    //     ];
+    
+    //     foreach ($request->input('set_type')[$index] as $setIndex => $setType) {
+    //         $set = [
+    //             'set_type' => $setType,
+    //             'set_exercises' => $request->input('set_exercises')[$index][$setIndex] ?? null,
+    //             'set_number_of_time_set' => $request->input('set_number_of_time_set')[$index][$setIndex] ?? null,
+    //             'set_intra_set_rest' => $request->input('set_intra_set_rest')[$index][$setIndex] ?? null,
+    //             'set_inter_set_rest' => $request->input('set_inter_set_rest')[$index][$setIndex] ?? null,
+    //             'set_duration_set' => $request->input('set_duration_set')[$index][$setIndex] ?? null,
+    //             'exercises' => [],
+    //         ];
+    
+    //         // Ensure that exercise_text_bio is an array
+    //         $exerciseTextBioArray = is_array($request->input('exercise_text_bio')[$index][$setIndex])
+    //             ? $request->input('exercise_text_bio')[$index][$setIndex]
+    //             : [$request->input('exercise_text_bio')[$index][$setIndex]];
+    
+    //         foreach ($exerciseTextBioArray as $exerciseIndex => $exerciseTextBio) {
+    //             $exercise = [
+    //                 'exercise_text_bio' => $exerciseTextBio,
+    //                 'exercise_number_of_repeat' => $request->input('exercise_number_of_repeat')[$index][$setIndex][$exerciseIndex] ?? null,
+    //             ];
+    
+    //             $set['exercises'][] = $exercise;
+    //         }
+    
+    //         $workout['sets'][] = $set;
+    //     }
+    //     $programData['workouts'][] = $workout;
+    // }
+    
+    // $jsonData = json_encode($programData);
+    
+    // $programWithExerciseSets = new ProgramWithExerciseSet(['program' => $jsonData]);
+    // $programWithExerciseSets->save();
+    
+    // return response()->json(['message' => 'Data stored successfully']);
+
+    
+    // $programData = [
+    //     'program_name' => [$request->input('program_name')],
+    //     'program_intro_video' => [$request->input('program_intro_video')],
+    //     'program_text_bio' => [$request->input('program_text_bio')],
+    //     'program_equi_neede' => [$request->input('program_equi_neede')],
+    //     'program_training_type' => [$request->input('program_training_type')],
+    //     'coach_id' => [$request->input('coach_id')],
+    //     'program_profile' => [$request->input('program_profile')],
+    //     'program_duration' => [$request->input('program_duration')],
+    //     'program_level' => [$request->input('program_level')],
+    //     'program_price' => [$request->input('program_price')],
+    //     'workout_text_bio' => [$request->input('workout_text_bio')],
+    //     'workout_training_type' => [$request->input('workout_training_type')],
+    //     'workout_equi_needed' => [$request->input('workout_equi_needed')],
+    //     'workout_estimated_duration' => [$request->input('workout_estimated_duration')],
+    //     'workout_rest_days' => [$request->input('workout_rest_days')],
+    //     'workout_number_of_exercises' => [$request->input('workout_number_of_exercises')],
+    //     'set_exercises' => [$request->input('set_exercises')],
+    //     'set_number_of_time_set' => [$request->input('set_number_of_time_set')],
+    //     'set_intra_set_rest' => [$request->input('set_intra_set_rest')],
+    //     'set_inter_set_rest' => [$request->input('set_inter_set_rest')],
+    //     'set_duration_set' => [$request->input('set_duration_set')],
+    //     'exercise_text_bio' => [$request->input('exercise_text_bio')],
+    //     'exercise_number_of_repeat' => [$request->input('exercise_number_of_repeat')],
+    // ];
+
+    // foreach ($request->input('workout_name') as $index => $workoutName) {
+    //     $workout = [
+    //         'workout_name' => $workoutName[0],
+    //         'workout_text_bio' => $request->input('workout_text_bio')[$index][0] ?? null,
+    //         'workout_training_type' => $request->input('workout_training_type')[$index] ?? null,
+    //         'workout_equi_needed' => $request->input('workout_equi_needed')[$index] ?? null,
+    //         'workout_estimated_duration' => $request->input('workout_estimated_duration')[$index] ?? null,
+    //         'workout_rest_days' => $request->input('workout_rest_days')[$index] ?? null,
+    //         'workout_number_of_exercises' => $request->input('workout_number_of_exercises')[$index] ?? null,
+    //         'sets' => [],
+    //     ];
+
+    //     foreach ($request->input('set_type')[$index] as $setIndex => $setType) {
+    //         $set = [
+    //             'set_type' => $setType,
+    //             'set_exercises' => $request->input('set_exercises')[$index][$setIndex] ?? null,
+    //             'set_number_of_time_set' => $request->input('set_number_of_time_set')[$index][$setIndex] ?? null,
+    //             'set_intra_set_rest' => $request->input('set_intra_set_rest')[$index][$setIndex] ?? null,
+    //             'set_inter_set_rest' => $request->input('set_inter_set_rest')[$index][$setIndex] ?? null,
+    //             'set_duration_set' => $request->input('set_duration_set')[$index][$setIndex] ?? null,
+    //             'exercises' => [],
+    //         ];
+
+    //         // Ensure that exercise_text_bio is an array
+    //         $exerciseTextBioArray = is_array($request->input('exercise_text_bio')[$index][$setIndex])
+    //             ? $request->input('exercise_text_bio')[$index][$setIndex]
+    //             : [$request->input('exercise_text_bio')[$index][$setIndex]];
+
+    //         foreach ($exerciseTextBioArray as $exerciseIndex => $exerciseTextBio) {
+    //             $exercise = [
+    //                 'exercise_text_bio' => $exerciseTextBio,
+    //                 'exercise_number_of_repeat' => $request->input('exercise_number_of_repeat')[$index][$setIndex][$exerciseIndex] ?? null,
+    //             ];
+
+    //             $set['exercises'][] = $exercise;
+    //         }
+
+    //         $workout['sets'][] = $set;
+    //     }
+    //     $programData['workouts'][] = $workout;
+    // }
+
+    // $jsonData = json_encode($programData);
+
+    // $programWithExerciseSets = new ProgramWithExerciseSet(['program' => $jsonData]);
+    // $programWithExerciseSets->save();
+
+    // return response()->json(['message' => 'Data stored successfully']);
+    
+    
+
+
+        // $programData = [
+        //     'program_name' => $request->input('program_name'),
+        //     'program_text_bio' => $request->input('program_text_bio'),
+        //     'program_equi_needed' => $request->input('program_equi_needed'),
+        //     'program_training_type' => $request->input('program_training_type'),
+        //     'coach_id' => $request->input('coach_id'),
+        //     'program_duration' => $request->input('program_duration'),
+        //     'program_level' => $request->input('program_level'),
+        //     'program_price' => $request->input('program_price'),
+        //     'workouts' => [
+        //         [
+        //             'workout_name' => $request->input('workout_name')[0][0],
+        //             'workout_text_bio' => $request->input('workout_text_bio')[0][0],
+        //             'workout_training_type' => $request->input('workout_training_type')[0],
+        //             'workout_equi_needed' => $request->input('workout_equi_needed')[0],
+        //             'workout_estimated_duration' => $request->input('workout_estimated_duration')[0],
+        //             'workout_rest_days' => $request->input('workout_rest_days')[0],
+        //             'workout_number_of_exercises' => $request->input('workout_number_of_exercises')[0],
+        //             'sets' => [
+        //                 [
+        //                     'set_type' => $request->input('set_type')[0][0],
+        //                     'set_exercises' => $request->input('set_exercises')[0],
+        //                     'set_number_of_time_set' => $request->input('set_number_of_time_set')[0],
+        //                     'set_intra_set_rest' => $request->input('set_intra_set_rest')[0],
+        //                     'set_inter_set_rest' => $request->input('set_inter_set_rest')[0],
+        //                     'set_duration_set' => $request->input('set_duration_set')[0],
+        //                     'exercises' => [
+        //                         [
+        //                             'exercise_text_bio' => $request->input('exercise_text_bio')[0][0],
+        //                             'exercise_number_of_repeat' => $request->input('exercise_number_of_repeat')[0],
+        //                             // Add more exercise fields if needed
+        //                         ],
+        //                         // Add more exercises if needed
+        //                     ],
+        //                 ],
+        //                 // Add more sets if needed
+        //             ],
+        //         ],
+        //         // Add more workouts if needed
+        //     ],
+        // ];
+    
+        // // Convert data to JSON
+        // $jsonData = json_encode($programData);
+    
+        // // Store data in the database
+        // $programWithExerciseSets = new ProgramWithExerciseSet(['program' => $jsonData]);
+        // $programWithExerciseSets->save();
+    
+        // return response()->json(['message' => 'Data stored successfully']);

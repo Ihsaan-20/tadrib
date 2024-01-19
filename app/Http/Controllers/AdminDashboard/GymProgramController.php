@@ -58,7 +58,7 @@ class GymProgramController extends Controller
             'number_of_workout'=>'required',
 
         ]);
-$input=$request->all();
+        $input=$request->all();
        $video=rand(000000,456423).'.'.$request->introductory_video->extension();
        $path=$request->introductory_video->storeAs('video',$video,'public');
        $input['introductory_video']=$path;
@@ -152,11 +152,13 @@ $program->update($input);
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Program $program)
-    {
-        $program->delete();
-        
-        // Redirect to index or show view
-        return redirect()->route('programs.index')->with('success', 'Program deleted successfully.');
-    }
+   public function destroy($id,Program $program)
+{
+    $program=Program::find($id);
+    
+    $program->delete();
+
+    // Redirect to index or show view
+    return redirect()->route('program.index')->with('success', 'Program deleted successfully.');
+}
 }

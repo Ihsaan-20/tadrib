@@ -34,7 +34,7 @@ class TagController extends Controller
     {
         $tags = Tag::all();
         //return view('Tags.create');
-        return view('Tags.create', compact('tags'));
+        return view('tags.create', compact('tags'));
     }
 
     /**

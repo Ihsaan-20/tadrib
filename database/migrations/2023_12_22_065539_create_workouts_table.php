@@ -17,6 +17,7 @@ return new class extends Migration
             $table->json('tags')->nullable();
             $table->text('introductory_video')->nullable();
             $table->text('text_bio')->nullable();
+             $table->unsignedBigInteger('coach_id');
             $table->time('estimated_duration_hours')->nullable();
             $table->integer('rest')->nullable();
             $table->json('number_of_exercises')->nullable();

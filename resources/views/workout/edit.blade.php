@@ -68,10 +68,23 @@
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Rest (in days):</strong>
-                        <input type="number" name="rest" value="{{ old('rest', $workout->rest) }}" class="form-control" placeholder="Rest">
+                        <input type="number" name="rest" value="{{ old('rest', $workout->rest) }}" class="phone_number form-control" placeholder="Rest">
                     </div>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6"></div>
+                 <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Coach Name:</strong>
+                        <select name='coach_id' class="form-control">
+                            <option selected disabled>Select Coach</option>
+                            @foreach ($coach as $w)
+                                <option value="{{ $w->id }}" @if ($workout->coach_id == $w->id) selected @endif>
+                                    {{ $w->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Tags:</strong>

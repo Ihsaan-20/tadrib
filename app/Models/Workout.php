@@ -13,6 +13,7 @@ class Workout extends Model
         'tags',
         'introductory_video',
         'text_bio',
+        'coach_id',
         'estimated_duration_hours',
         'rest',
         'number_of_exercises',

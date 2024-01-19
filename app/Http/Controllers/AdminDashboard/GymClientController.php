@@ -28,7 +28,7 @@ class GymClientController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+             'email' => 'required|email|unique:users,email',
             'phone_number' => 'required',
             'password'=>'required|confirmed',
         ]);
@@ -67,7 +67,7 @@ class GymClientController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'phone_number' => 'required',
             'profile_picture'=>'image|mimes:jpeg,png,jpg,gif'
         ]);

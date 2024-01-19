@@ -48,7 +48,7 @@ class GymCoachController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+             'email' => 'required|email|unique:users,email',
             'phone_number' => 'required',
             'bio' => 'required',
             'tags.*'=>'required',
@@ -104,7 +104,7 @@ class GymCoachController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'phone_number' => 'required',
             'bio' => 'required',
             'profile_picture'=>'image|mimes:jpeg,png,jpg,gif'

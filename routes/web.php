@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminDashboard\GymCoachController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AdminDashboard\TagController;
 use App\Http\Controllers\AdminDashboard\ExercisesController;
+use App\Http\Controllers\AdminDashboard\FormController;
 use App\Http\Controllers\AdminDashboard\GymClientController;
 use App\Http\Controllers\AdminDashboard\WorkoutController;
 use App\Http\Controllers\AdminDashboard\GymSetController;
@@ -31,6 +32,11 @@ use App\Http\Controllers\AdminDashboard\GymSetController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
+
+
 
 Route::get('/', function () {
     return view('auth/register');
@@ -132,7 +138,7 @@ Route::post('/program/store',[GymProgramController::class,'store'])->name('progr
 Route::get('/program/show/{id}',[GymProgramController::class,'show'])->name('program.show');
 Route::get('/program/edit/{id}',[GymProgramController::class,'edit'])->name('program.edit');
 Route::put('/program/update/{id}',[GymProgramController::class,'update'])->name('program.update');
-Route::post('/program/delete/{id}',[GymProgramController::class,'destroy'])->name('program.destroy');
+Route::get('/program/{id}', [GymProgramController::class, 'destroy'])->name('program.destroy');
 
 
 // Route ExercisesController Controllers
@@ -152,7 +158,7 @@ Route::post('workout', [WorkoutController::class, 'store'])->name('workout.store
 Route::get('workout/{workout}', [WorkoutController::class, 'show'])->name('workout.show');
 Route::get('workout/{workout}/edit', [WorkoutController::class, 'edit'])->name('workout.edit');
 Route::put('workout/{workout}', [WorkoutController::class, 'update'])->name('workout.update');
-Route::delete('workout/{workout}', [WorkoutController::class, 'destroy'])->name('workout.destroy');
+Route::post('workout/{workout}', [WorkoutController::class, 'destroy'])->name('workout.destroy');
 
 // Route ExercisesController Controllers
 
@@ -164,6 +170,19 @@ Route::get('/set/edit/{id}',[GymSetController::class,'edit'])->name('set.edit');
 Route::put('/set/update/{id}',[GymSetController::class,'update'])->name('set.update');
 Route::post('/set/delete/{id}',[GymSetController::class,'destroy'])->name('set.destroy');
 
+
+
+Route::get('form/index', [FormController::class, 'index'])->name('form.index');
+Route::get('form/create', [FormController::class, 'create'])->name('form.create');
+Route::post('form/store', [FormController::class, 'store'])->name('form.store');
+
+Route::get('form/edit/{id}', [FormController::class, 'edit'])->name('form.edit');
+Route::get('form/destroy/{id}', [FormController::class, 'destroy'])->name('form.destroy');
+
+
+Route::get('new/form', function (){
+    return view('form.new_form');
+});
 
 
 

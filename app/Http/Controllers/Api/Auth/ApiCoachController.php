@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Coach;
 use App\Models\Tag;
 use App\Models\User;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,6 +15,29 @@ class ApiCoachController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function getCoachPrograms(int $coach_id)
+    {
+        // dd($coach_id);
+
+        $programs = Program::where('coach_id', $coach_id)->get();
+        if($programs)
+        {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Data fetched',
+                'programs' => $programs
+            ], 200);
+        }
+        else
+        {
+            return response()->json([
+                'status' => 404,
+                'message' => 'No data found...',
+            ], 404);
+        }
+    }
+
+
     public function getAllCoachs(Request $request)
     {
         $keyword = $request->input('search');

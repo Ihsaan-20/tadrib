@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Exercise;
 
+use App\Models\User;
+
 class ExercisesController extends Controller
 {
     public function index()
@@ -28,7 +30,8 @@ class ExercisesController extends Controller
     public function create()
     {
         
-        return view('exercise.create');
+             $coach = User::where('role_id','=',2)->get();
+        return view('exercise.create', compact('coach'));
     }
 
     /**
@@ -43,6 +46,7 @@ class ExercisesController extends Controller
         $request->validate([
             'name' => 'required',
             'text_bio' => 'required',
+            'coach_id'=>'required',
             'repetitions' => 'required|integer',
             'video' => 'required|mimes:mp4,avi,mov,wmv|max:10240', // Adjust the allowed video file types and size
         ]);
@@ -65,6 +69,7 @@ class ExercisesController extends Controller
             'name' => $request->input('name'),
             'description_video' => $videoFileName,
             'text_bio' => $request->input('text_bio'),
+             'coach_id' => $request->input('coach_id'),
             'repetitions' => $request->input('repetitions'),
         ]);
     
@@ -81,9 +86,9 @@ class ExercisesController extends Controller
     public function edit(Exercise $exercises)
     {
 
-
+ $coach = User::where('role_id','=',2)->get();
         $exercise = Exercise::find($exercises->id);
-        return view('exercise.edit', compact('exercise'));
+        return view('exercise.edit', compact('exercise','coach'));
     }
 
     /**
@@ -114,6 +119,7 @@ class ExercisesController extends Controller
         $exerciseData = [
             'name' => $request->input('name'),
             'text_bio' => $request->input('text_bio'),
+              'coach_id' => $request->input('coach_id'),
             'repetitions' => $request->input('repetitions'),
         ];
 

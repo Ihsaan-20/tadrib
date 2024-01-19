@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->text('description_video')->nullable();
             $table->text('text_bio')->nullable();
+             $table->unsignedBigInteger('coach_id');
             $table->integer('repetitions')->nullable();
             $table->timestamps();
         });

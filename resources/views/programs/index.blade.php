@@ -11,11 +11,11 @@
         </div>
     </div>
    
-    @if ($message = Session::get('success'))
+    {{-- @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
-    @endif
+    @endif --}}
    
     <table class="table table-bordered">
         <tr>
@@ -40,23 +40,18 @@
             $coach = App\Models\User::find($program->coach_id);
           
         @endphp
-                           {{$coach->name}}
+                         @if($coach)  {{$coach->name}}@endif
                         </td>
                         <td>{{ $program->level }}</td>
                         <td>{{ $program->duration_weeks }} weeks</td>
             <td>
 
-                <form action="{{ route('program.destroy',$program->id) }}" method="POST">
-   
-                    <a class="btn btn-info" href="{{ route('program.show',$program->id) }}">Show</a>
-    
-                    <a class="btn btn-primary" href="{{ route('program.edit',$program->id) }}">Edit</a>
-   
-                    @csrf
-                    @method('DELETE')
-      
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+              
+    <a class="btn btn-info" href="{{ route('program.show', $program->id) }}">Show</a>
+    <a class="btn btn-primary" href="{{ route('program.edit', $program->id) }}">Edit</a>
+    <a class="btn btn-primary" href="{{ route('program.destroy', $program->id) }}">Delete</a>
+
+
             </td>
         </tr>
         @endforeach

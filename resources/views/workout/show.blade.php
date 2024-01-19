@@ -33,6 +33,7 @@
 
             <p class="mt-3"><strong>Tags:</strong></p>
             <ul class="list-unstyled">
+                @if($workout->tags)
                 @foreach (json_decode($workout->tags) as $tag_id)
                     @php
                         $tag = App\Models\Tag::find($tag_id);
@@ -42,10 +43,12 @@
                         <li class="badge badge-primary">{{ $tag->tag }}</li>
                     @endif
                 @endforeach
+                @endif
             </ul>
 
             <p class="mt-3"><strong>Exercises:</strong></p>
             <ul class="list-unstyled">
+                @if($workout->number_of_exercises)
                 @foreach (json_decode($workout->number_of_exercises) as $exercise_id)
                     @php
                         $exercise = App\Models\Exercise::find($exercise_id);
@@ -55,6 +58,7 @@
                         <li class="badge badge-success">{{ $exercise->name }}</li>
                     @endif
                 @endforeach
+                 @endif
             </ul>
         </div>
     </div>

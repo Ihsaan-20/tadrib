@@ -73,6 +73,8 @@
                     <input type="file" name="introductory_video" value="{{$program->introductory_video}}" class="form-control">
                 </div>
             </div>
+            
+            
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group"><br>
                     @if($program->introductory_video)
@@ -84,6 +86,12 @@
                     @endif
                 </div>
             </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <strong>External Video link:</strong>
+                <input type="url"  name='external_video' value="{{$program->external_video}}" class="form-control" placeholder="Video link">
+            </div>
+        </div>
 
             <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="form-group">
@@ -109,42 +117,41 @@
                     <select name='coach_id' class="form-control">
                         <option selected disabled>Select Coach</option>
                         @foreach ($coach as $w)
-                        <option value="{{$w->id}}">{{$w->name}}</option>  
+                            <option value="{{ $w->id }}" @if ($program->coach_id == $w->id) selected @endif>
+                                {{ $w->name }}
+                            </option>
                         @endforeach
-                        
-                       </select>
-                   
+                    </select>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Duration (week):</strong>
-                    <input type="number" name='duration_weeks' class="form-control" value="{{$program->duration_weeks}}" placeholder="Duration (weeks)">
+                    <input type="text" name='duration_weeks' class="phone_number form-control" value="{{$program->duration_weeks}}" placeholder="Duration (weeks)">
                    
                 </div>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Price (USD):</strong>
-                    <input type="number" name='price_usd' value="{{$program->price_usd}}"  class="form-control" placeholder="Price in USD">
+                    <input type="text" name='price_usd' value="{{$program->price_usd}}"  class="phone_number form-control" placeholder="Price in USD">
                    
                 </div>
             </div>
 
-            <div class="col-xs-6 col-sm-6 col-md-6">
-                <div class="form-group">
-                    <strong>Level:</strong>
-                    <select name='level' class="form-control">
-                        <option selected value='{{$program->level}}'>Select Level</option>
-                       
-                        <option value="Beginner">Beginner</option>  
-                        <option value="Intermediate">Intermediate</option>  
-                        <option value="Advanced">Advanced</option>  
-                        
-                       </select>
-                   
-                </div>
-            </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+    <div class="form-group">
+        <strong>Level:</strong>
+        <select name='level' class="form-control">
+            <option value='Select Level' disabled>Select Level</option>
+            
+            <option value="Beginner" @if($program->level == 'Beginner') selected @endif>Beginner</option>  
+            <option value="Intermediate" @if($program->level == 'Intermediate') selected @endif>Intermediate</option>  
+            <option value="Advanced" @if($program->level == 'Advanced') selected @endif>Advanced</option>  
+        </select>
+    </div>
+</div>
+
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Text Bio:</strong>
