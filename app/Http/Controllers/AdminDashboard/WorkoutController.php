@@ -50,7 +50,10 @@ class WorkoutController extends Controller
             'text_bio' => 'required',
             'estimated_duration_hours' => 'required',
             'rest' => 'required',
+<<<<<<< HEAD
             'coach_id'=>'required',
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
             'tags' => 'required',
             'number_of_exercises' => 'required',
         ]);

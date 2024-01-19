@@ -55,6 +55,7 @@
             </a>
         </li>
 
+<<<<<<< HEAD
         <li>
             <a class="nav-link" href="{{route('form.index')}}">
                 <i class="nc-icon nc-circle-09"></i>
@@ -69,6 +70,8 @@
             </a>
         </li>
 
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
       
         {{-- <li>
             <a class="nav-link" href="./maps.html">

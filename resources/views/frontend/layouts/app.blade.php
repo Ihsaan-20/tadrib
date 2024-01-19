@@ -90,7 +90,11 @@
 
 <!-- Include jQuery in your HTML file if not already included -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<<<<<<< HEAD
 @yield('main-js')
+=======
+
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
 <script>
   $(document).ready(function() {
     // Attach an input event listener to the phone_number field

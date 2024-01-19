@@ -33,7 +33,10 @@ class ApiExerciseControleler extends Controller
             'text_bio' => 'required',
             'repetitions' => 'required|integer',
             'video' => 'required|mimes:mp4,avi,mov,wmv|max:10240',
+<<<<<<< HEAD
             'coach_id'=>'required',
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
         ]);
 
         if ($validator->fails()) {
@@ -93,7 +96,10 @@ class ApiExerciseControleler extends Controller
             'text_bio' => 'required',
             'repetitions' => 'required|integer',
             'video' => 'nullable|mimes:mp4,avi,mov,wmv|max:10240',
+<<<<<<< HEAD
             'coach_id'=>'nullable'
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
         ]);
 
         if($validator->fails())
@@ -112,7 +118,10 @@ class ApiExerciseControleler extends Controller
                     'name' => $request->input('name'),
                     'text_bio' => $request->input('text_bio'),
                     'repetitions' => $request->input('repetitions'),
+<<<<<<< HEAD
                     'coach_id'=>$request->coach_id,
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
                 ];
     
                 // Check if a new video file is provided

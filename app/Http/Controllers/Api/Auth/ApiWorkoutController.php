@@ -37,7 +37,10 @@ class ApiWorkoutController extends Controller
             'introductory_video' => 'required', // Adjust the allowed video file types and size
             'text_bio' => 'required',
             'estimated_duration_hours' => 'required',
+<<<<<<< HEAD
             'coach_id'=>'required',
+=======
+>>>>>>> 4664eab690b4b56fe85d081b63f489a28547a674
             'rest' => 'required',
             'tags.*' => 'required',
             'number_of_exercises.*' => 'required',
